@@ -1,0 +1,30 @@
+---
+resources:
+  - name: version
+    type: semver
+    source:
+      driver: git
+      initial_version: 0.0.1
+      uri: {{version-repo-uri}}
+      branch: {{version-repo-branch}}
+      file: {{version-file}}
+      username: {{git-user}}
+      password: {{git-token}}
+  - name: git-repo
+    type: git
+    source:
+      uri: {{version-repo-uri}}
+      username: {{git-user}}
+      password: {{git-token}}
+      branch: master 
+
+jobs:
+  - name: increment-version
+    serial: true
+    plan:
+      - get: git-repo
+        trigger: true
+      - get: version
+        params: {bump: patch}
+      - put: version
+        params: {file: version/version}
