@@ -26,5 +26,13 @@ jobs:
         trigger: true
       - get: version
         params: {bump: patch}
+      - task: display-version
+        config:
+          platform: linux
+          inputs:
+            - name: version
+          run:
+            path: cat
+            args: [version/number]
       - put: version
         params: {file: version/version}
