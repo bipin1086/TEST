@@ -5,11 +5,12 @@ resources:
     source:
       driver: git
       initial_version: 0.0.1
-      uri: {{version-repo-uri}}
+      uri: git@github.com:bipin1086/TEST.git
       branch: {{version-repo-branch}}
       file: {{version-file}}
-      username: {{git-user}}
-      password: {{git-token}}
+      private_key: {{git-key}}
+
+     
   - name: git-repo
     type: git
     source:
